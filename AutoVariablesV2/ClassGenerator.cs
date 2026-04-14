@@ -100,7 +100,7 @@ public class ClassGenerator : IIncrementalGenerator {
 		public readonly bool isSimple;
 		public readonly string name;
 		public readonly string unitName;
-		public readonly List<(string, string, double)> scales = [];
+		private readonly List<(string, string, double)> scales = [];
 		public readonly List<(string, bool, string)> conversions = [];
 		
 		public Unit(string name) {
@@ -225,18 +225,18 @@ public class ClassGenerator : IIncrementalGenerator {
 	private static void GenerateInterface(SourceProductionContext context) {
 		string file = """
 					  namespace NAMESPACE {
-					  public interface IAutoUnit {}
-					  public interface IAutoUnit2 {}
-					  public interface IAutoUnit3 {}
-					  
-					  public interface IAutoUnitUI {}
-					  public interface IAutoUnitUI2 {}
-					  public interface IAutoUnitUI3 {}
+					      public interface IAutoUnit {}
+					      public interface IAutoUnit2 {}
+					      public interface IAutoUnit3 {}
+					      
+					      public interface IAutoUnitUI {}
+					      public interface IAutoUnitUI2 {}
+					      public interface IAutoUnitUI3 {}
 					  }
 					  """.Replace("NAMESPACE", NAMESPACE);
 		
 		SourceText source = SourceText.From(file, Encoding.UTF8);
-		context.AddSource("Interfaces.g.cs", source);
+		context.AddSource("ASV/Utils/Interfaces.g.cs", source);
 	}
 
 	private static void GenerateClasses(SourceProductionContext context) {
@@ -247,19 +247,35 @@ public class ClassGenerator : IIncrementalGenerator {
 			for (int i = 0; i < dim; i++) {
 				SourceText source = GenerateUnitClass(unit, i);
 				string name = keyValuePair.Key + GetVectorFloatDimension(i);
-				context.AddSource($"{name}.g.cs", source);
+
+				string folder = i switch {
+					0 => "Values1D/",
+					1 => "Values2D/",
+					2 => "Values3D/",
+					_ => "ERROR/"
+				};
+				
+				context.AddSource($"ASV/{folder}{name}.g.cs", source);
 			}
 			
 			SourceText sourceUI = GenerateUnitUIClass(unit, dim);
-			context.AddSource($"{keyValuePair.Key}_UI.g.cs", sourceUI);
+			context.AddSource($"ASV/ValuesUI/{keyValuePair.Key}_UI.g.cs", sourceUI);
 		}
 	}
 	
 	private static SourceText GenerateUnitClass(Unit unit, int d) {
 		StringBuilder sb = new();
-		GenerateUnitData(sb, unit, d);
-		GenerateUnitScales(sb, unit, d);
-		GenerateUnitConversions(sb, unit, d);
+		
+		try {
+			GenerateUnitData(sb, unit, d);
+		
+			GenerateUnitScales(sb, unit, d);
+			GenerateUnitConversions(sb, unit, d);
+		}
+		catch (Exception e) {
+			Console.WriteLine(e);
+		}
+		
 		sb.AppendLine("}");
 		sb.AppendLine("}");
 		return SourceText.From(sb.ToString(), Encoding.UTF8);
@@ -267,19 +283,22 @@ public class ClassGenerator : IIncrementalGenerator {
 	
 	private static SourceText GenerateUnitUIClass(Unit unit, int d) {
 		StringBuilder sb = new();
-
+		
 		const string PATTERN1 = """
 		                        using System;
 		                        using AutoVariablesApp;
 		                        namespace NAMESPACE {
+		                        [System.Serializable]
 		                        public struct UNIT_UI : INTERFACE {
 		                            public float x;
-		                            
 		                            public UNIT_UIType type;
+		                            
+		                            public UNIT Value => this;
 		                            
 		                            public UNIT_UI(float x) {
 		                                this.x = x;
 		                            }
+		                            
 		                            public static implicit operator float(UNIT_UI v) => v.x;
 		                            public static implicit operator UNIT(UNIT_UI v) => new(v.x);
 		                            public UNIT magnitude => new(x);
@@ -288,10 +307,13 @@ public class ClassGenerator : IIncrementalGenerator {
 		
 		const string PATTERN2 = """       
 		                        
+		                        
+		                        [System.Serializable]
 		                        public struct UNIT2_UI : INTERFACE2 {
 		                            public float x, y;
-		                            
 		                            public UNIT_UIType type;
+		                            
+		                            public UNIT2 Value => this;
 		                            
 		                            public UNIT2_UI(float x, float y) {
 		                                this.x = x;
@@ -311,10 +333,13 @@ public class ClassGenerator : IIncrementalGenerator {
         
 		const string PATTERN3 = """      
 		                        
+		                        
+		                        [System.Serializable]
 		                        public struct UNIT3_UI : INTERFACE3 {
 		                            public float x, y, z;
-		                            
 		                            public UNIT_UIType type;
+		                            
+		                            public UNIT3 Value => this;
 		                            
 		                            public UNIT3_UI(float x, float y, float z) {
 		                                this.x = x;
@@ -344,30 +369,35 @@ public class ClassGenerator : IIncrementalGenerator {
 			.Replace("NAMESPACE", NAMESPACE)
 			.Replace("INTERFACE", "IAutoUnitUI"));
 
-		string PATTERN4 = """
-		                  
-		                  [InspectorName("UNIT")]
-		                  UNIT_NAME,
-		                  """;
-
+		const string PATTERN4 = """
+		                            [InspectorName("UNIT")]
+		                            UNIT_NAME,
+		                        """;
+		
 		StringBuilder allPatterns = new();
-
+		
 		foreach (string scale in unitInspectorValues[unit.name]) {
-			string scaleName = unit.scales.FirstOrDefault(t => t.Item1.Equals(scale)).Item2;
+			string scaleName = unit.GetScales().FirstOrDefault(t => t.Item1.Equals(scale)).Item2;
+			if (scaleName == null) continue;
+			
 			allPatterns.AppendLine(
-				scaleName
+				PATTERN4
 					.Replace("UNIT_NAME", scaleName)
 					.Replace("UNIT", scale)
 				);
 		}
-		
-		string PATTERN5 = """
-		                  
-		                      public enum UNIT_UIType {
-		                          PATTERN4
-		                      }
-		                  """.Replace("PATTERN4", allPatterns.ToString());
 
+		const string PATTERN5 = """
+
+		                        public enum UNIT_UIType {
+		                        PATTERN4
+		                        }
+		                        """;
+
+		sb.AppendLine(PATTERN5
+			.Replace("PATTERN4", allPatterns.ToString())
+			.Replace("UNIT", UNIT));
+		
 		sb.AppendLine("}");
 		return SourceText.From(sb.ToString(), Encoding.UTF8);
 	}
@@ -461,7 +491,7 @@ public class ClassGenerator : IIncrementalGenerator {
 		
 		string UNIT = unit.GetName(d);
 		
-		foreach ((string name, string fullName, double value)  in unit.scales) {
+		foreach ((string name, string fullName, double value)  in unit.GetScales()) {
 			string SUB_PATTERN = PATTERN
 				.Replace("VECTOR", GetVector(d))
 				.Replace("PATTERN1", RepeatPatternXYZ(d, PATTERN1))

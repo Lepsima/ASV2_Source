@@ -19,3 +19,10 @@ E:/Projects/AutoVariablesV2/AutoVariablesApp/obj/Debug/net9.0/ref/AutoVariablesA
 /home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/obj/Debug/net9.0/AutoVariablesApp.dll
 /home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/obj/Debug/net9.0/refint/AutoVariablesApp.dll
 /home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/obj/Debug/net9.0/AutoVariablesApp.pdb
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/bin/Debug/net9.0/AutoVariablesApp
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/bin/Debug/net9.0/AutoVariablesApp.deps.json
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/bin/Debug/net9.0/AutoVariablesApp.runtimeconfig.json
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/bin/Debug/net9.0/AutoVariablesApp.dll
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/bin/Debug/net9.0/AutoVariablesApp.pdb
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/obj/Debug/net9.0/AutoVariablesApp.genruntimeconfig.cache
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/obj/Debug/net9.0/ref/AutoVariablesApp.dll

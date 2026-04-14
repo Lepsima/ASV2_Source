@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ndz3MjcQVEw=",
+  "dgSpecHash": "QbEe51iq730=",
   "success": true,
   "projectFilePath": "/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/AutoVariablesApp.csproj",
-  "expectedPackageFiles": [
-    "/home/lepsima/.nuget/packages/microsoft.netcore.app.ref/9.0.14/microsoft.netcore.app.ref.9.0.14.nupkg.sha512",
-    "/home/lepsima/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.14/microsoft.aspnetcore.app.ref.9.0.14.nupkg.sha512",
-    "/home/lepsima/.nuget/packages/microsoft.netcore.app.host.linux-x64/9.0.14/microsoft.netcore.app.host.linux-x64.9.0.14.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }
