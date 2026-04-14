@@ -1,0 +1,14 @@
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/obj/Debug/net10.0/AutoVariablesApp.GeneratedMSBuildEditorConfig.editorconfig
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/obj/Debug/net10.0/AutoVariablesApp.AssemblyInfoInputs.cache
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/obj/Debug/net10.0/AutoVariablesApp.AssemblyInfo.cs
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/obj/Debug/net10.0/AutoVariablesApp.csproj.CoreCompileInputs.cache
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/bin/Debug/net10.0/AutoVariablesApp
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/bin/Debug/net10.0/AutoVariablesApp.deps.json
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/bin/Debug/net10.0/AutoVariablesApp.runtimeconfig.json
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/bin/Debug/net10.0/AutoVariablesApp.dll
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/bin/Debug/net10.0/AutoVariablesApp.pdb
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/obj/Debug/net10.0/AutoVariablesApp.dll
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/obj/Debug/net10.0/refint/AutoVariablesApp.dll
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/obj/Debug/net10.0/AutoVariablesApp.pdb
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/obj/Debug/net10.0/AutoVariablesApp.genruntimeconfig.cache
+/home/lepsima/Projects/Terminal/AutoVariablesV2/AutoVariablesApp/obj/Debug/net10.0/ref/AutoVariablesApp.dll
