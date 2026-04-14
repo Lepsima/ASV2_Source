@@ -31,12 +31,6 @@ public class ClassGenerator : IIncrementalGenerator {
 			("t", "Ton", 1000),
 			("kt", "Kiloton", 1000000),
 		]),
-		("Force", [
-			("mN", "Millinewton", 0.001),
-			("N", "Newton", 1),
-			("kN", "Kilonewton", 1000),
-			("MN", "Meganewton", 1000000),
-		]),
 		("Time", [
 			("μs", "Microsecond", 0.000001),
 			("ms", "Millisecond", 0.001),
@@ -55,13 +49,25 @@ public class ClassGenerator : IIncrementalGenerator {
 			("km", "Kilometer", 1000),
 			("Mm", "Megameter", 1000000),
 		]),
+		("Force", [
+			("mN", "Millinewton", 0.001),
+			("N", "Newton", 1),
+			("kN", "Kilonewton", 1000),
+			("MN", "Meganewton", 1000000),
+		]),
 		("Angle", [
 			("deg", "Degree", 1),
 			("rad", "Radian", 0.01745329238474369),
 			("trn", "Turn", 360),
 			("'", "MinuteDegree", 0.016666666666666666),
 			("''", "SecondDegree", 0.0002777777777777778),
-		])
+		]),
+		("Torque", [
+			("mNm", "MillinewtonMeter", 0.001),
+			("Nm", "NewtonMeter", 1),
+			("kNm", "KilonewtonMeter", 1000),
+			("MNm", "MeganewtonMeter", 1000000),
+		]),
 	];
 
 	private static readonly Dictionary<string, string> standardUnits = new() {
@@ -80,6 +86,8 @@ public class ClassGenerator : IIncrementalGenerator {
 		{"Angle", "deg"},
 		{"AngleVel", "deg/s"},
 		{"AngleAccel", "deg/s2"},
+		{"Torque", "Nm"},
+		{"TorqueAccel", "Nm/s"}
 	};
 	
 	private static readonly Dictionary<string, string[]> unitInspectorValues = new() {
