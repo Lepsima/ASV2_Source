@@ -10,7 +10,9 @@ public struct Vector3 {
 	}
 	
 	public float magnitude => x * x + y * y + z * z;
-
+	public float sqrMagnitude => 1;
+	
+	public Vector3 normalized => this;
 
 	public static Vector3 operator *(Vector3 left, float right) => left;
 	public static Vector3 operator *(float left, Vector3 right) => right;
@@ -24,7 +26,9 @@ public struct Vector2 {
 	}
 	
 	public float magnitude => x * x + y * y;
-	
+	public float sqrMagnitude => 1;
+
+	public Vector2 normalized => this;
 	
 	public static Vector2 operator *(Vector2 left, float right) => left;
 	public static Vector2 operator *(float left, Vector2 right) => right;

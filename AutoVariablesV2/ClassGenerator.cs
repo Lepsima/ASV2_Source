@@ -410,7 +410,7 @@ public class ClassGenerator : IIncrementalGenerator {
 		                            public Vector2 vector => this;
 		                            public static implicit operator Vector2(UNIT v) => new(v.x, v.y);
 		                        
-		                            public Direction3 normalized => new(vector.normalized);
+		                            public Direction2 normalized => new(vector.normalized);
 		                            public SPECIAL sqrMagnitude => new(vector.sqrMagnitude);
 		                            public SPECIAL magnitude => new(vector.magnitude);
 		                        """;
